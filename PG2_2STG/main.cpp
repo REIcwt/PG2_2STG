@@ -7,7 +7,7 @@
 #include "Enemy.h"
 #include "ChangeScreen.h"
 
-const char kWindowTitle[] = "GC1A_07_シュウ_エイトウ";
+const char kWindowTitle[] = "SHOOTING";
 
 
 // Windowsアプリでのエントリーポイント(main関数)
@@ -53,29 +53,30 @@ int WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int) {
 			enemyB->isAlive_ = 1;
 		}
 
+		enemyA->Update();
+		enemyB->Update();
+
 		if (screen->sceneNum == 1) {
 			if (player->isAlive_ == 1) {
 				player->Update(keys, preKeys);
 
-				if (enemyA->Collision(player->pos_.x, player->pos_.y, enemyA->pos_.x, enemyA->pos_.y) <= (enemyA->radius_ + player->radius_) * (enemyA->radius_ + player->radius_) && enemyA->isAlive_ == 1) {
+				if (enemyA->Collision(player->pos_.x, player->pos_.y, enemyA->GetPosX(), enemyA->GetPosY()) <= (enemyA->GetRadius() + player->radius_) * (enemyA->GetRadius() + player->radius_) && enemyA->isAlive_ == 1) {
 					player->isAlive_ = 0;
 				}
 
-				if (enemyB->Collision(player->pos_.x, player->pos_.y, enemyB->pos_.x, enemyB->pos_.y) <= (enemyB->radius_ + player->radius_) * (enemyB->radius_ + player->radius_) && enemyB->isAlive_ == 1) {
+				if (enemyB->Collision(player->pos_.x, player->pos_.y, enemyB->GetPosX(), enemyB->GetPosY()) <= (enemyB->GetRadius() + player->radius_) * (enemyB->GetRadius() + player->radius_) && enemyB->isAlive_ == 1) {
 					player->isAlive_ = 0;
 				}
 			}
 
-			enemyA->Update();
-			enemyB->Update();
 
 			if (enemyA->isAlive_ == 1) {
-				if (enemyA->Collision(player->bullet_.pos_.x, player->bullet_.pos_.y, enemyA->pos_.x, enemyA->pos_.y) <= (enemyA->radius_ + player->bullet_.radius_) * (enemyA->radius_ + player->bullet_.radius_)) {
+				if (enemyA->Collision(player->bullet_.pos_.x, player->bullet_.pos_.y, enemyA->GetPosX(), enemyA->GetPosY()) <= (enemyA->GetRadius() + player->bullet_.radius_) * (enemyA->GetRadius() + player->bullet_.radius_)) {
 					enemyA->isAlive_ = 0;
 				}
 			}
 			if (enemyB->isAlive_ == 1) {
-				if (enemyB->Collision(player->bullet_.pos_.x, player->bullet_.pos_.y, enemyB->pos_.x, enemyB->pos_.y) <= (enemyB->radius_ + player->bullet_.radius_) * (enemyB->radius_ + player->bullet_.radius_)) {
+				if (enemyB->Collision(player->bullet_.pos_.x, player->bullet_.pos_.y, enemyB->GetPosX(), enemyB->GetPosY()) <= (enemyB->GetRadius() + player->bullet_.radius_) * (enemyB->GetRadius() + player->bullet_.radius_)) {
 					enemyB->isAlive_ = 0;
 				}
 			}
