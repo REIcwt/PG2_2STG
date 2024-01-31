@@ -7,7 +7,7 @@
 #include "Enemy.h"
 #include "ChangeScreen.h"
 
-const char kWindowTitle[] = "GC1A_07_シュウ_エイトウ";
+const char kWindowTitle[] = "SHOOTING";
 
 
 // Windowsアプリでのエントリーポイント(main関数)
